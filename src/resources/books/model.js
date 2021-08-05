@@ -92,6 +92,24 @@ function book() {
     });
   }
 
+  function deleteOneBookById(req, res) {
+    const bookIdToDelete = req.params.id;
+
+    const deleteOneBookSql = `
+      DELETE FROM books
+      WHERE id = $1;
+      `;
+
+    dbClient
+      .query(deleteOneBookSql, [bookIdToDelete])
+      .then((result) =>
+        res.json({
+          book: { user: bookIdToDelete, msg: "Well done the book is deleted" },
+        })
+      )
+      .catch(console.error);
+  }
+
   createTable();
 
   return {
@@ -99,6 +117,7 @@ function book() {
     getAllBooks,
     getOneBook,
     updateOneBookById,
+    deleteOneBookById,
   };
 }
 

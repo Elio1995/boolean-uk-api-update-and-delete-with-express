@@ -3,7 +3,13 @@ const book = require("./model");
 
 const booksRouter = express.Router();
 
-const { createOneBook, getAllBooks, getOneBook, updateOneBookById } = book();
+const {
+  createOneBook,
+  getAllBooks,
+  getOneBook,
+  updateOneBookById,
+  deleteOneBookById,
+} = book();
 
 booksRouter.get("/", (req, res) => {
   const books = req.body;
@@ -27,5 +33,7 @@ booksRouter.post("/", (req, res) => {
 });
 
 booksRouter.patch("/:id", updateOneBookById);
+
+booksRouter.delete("/:id", deleteOneBookById);
 
 module.exports = booksRouter;
